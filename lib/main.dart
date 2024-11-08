@@ -1,4 +1,6 @@
-import 'package:crypto_tracker/View/home_screen.dart';
+import 'package:crypto_tracker/features/home/View/home_screen.dart';
+import 'package:crypto_tracker/shared/styles/dark_theme.dart';
+import 'package:crypto_tracker/shared/styles/light_theme.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,6 +14,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode
+          .system, // Uses system setting to toggle between day and night
+      theme: lightTheme,
+      darkTheme: darkTheme,
       home: HomeScreen(),
     );
   }

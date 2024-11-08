@@ -145,10 +145,10 @@ class Roi {
       };
 }
 
-enum Currency { BTC, ETH, USD }
+enum Currency { btc, eth, usd }
 
 final currencyValues =
-    EnumValues({"btc": Currency.BTC, "eth": Currency.ETH, "usd": Currency.USD});
+    EnumValues({"btc": Currency.btc, "eth": Currency.eth, "usd": Currency.usd});
 
 class EnumValues<T> {
   Map<String, T> map;

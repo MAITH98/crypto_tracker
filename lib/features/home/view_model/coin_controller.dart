@@ -1,4 +1,4 @@
-import 'package:crypto_tracker/models/coin_model.dart';
+import 'package:crypto_tracker/core/models/coin_model.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
