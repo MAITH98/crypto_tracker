@@ -65,4 +65,13 @@ final ThemeData lightTheme = ThemeData(
       ),
     ),
   ),
+  // Custom Scrollbar Theme
+  scrollbarTheme: ScrollbarThemeData(
+    thumbColor: WidgetStateProperty.all(
+        const Color.fromARGB(255, 145, 186, 194)), // Bluish thumb color
+    trackColor: WidgetStateProperty.all(
+        Colors.grey.withOpacity(0.3)), // Optional: Light track color
+    radius: const Radius.circular(30),
+    minThumbLength: 3,
+  ),
 );

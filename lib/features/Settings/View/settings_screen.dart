@@ -11,7 +11,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   // Using GetX to manage the theme mode state
-  Rx<ThemeMode> themeMode = ThemeMode.system.obs;
+  Rx<ThemeMode> themeMode = ThemeMode.light.obs;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 children: [
-                  // Theme Mode Toggle Section
+                  // Theme Mode Display Section
                   Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -47,55 +47,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           color: Colors.black87,
                         ),
                       ),
-                      subtitle: Obx(
-                        () {
-                          // Display current theme mode
-                          String mode = themeMode.value == ThemeMode.light
-                              ? 'Light Mode'
-                              : themeMode.value == ThemeMode.dark
-                                  ? 'Dark Mode'
-                                  : 'System Default';
-                          return Text(
-                            mode,
-                            style: const TextStyle(color: Colors.black54),
-                          );
-                        },
-                      ),
-                      trailing: DropdownButton<ThemeMode>(
-                        value: themeMode.value,
-                        onChanged: (ThemeMode? newMode) {
-                          if (newMode != null) {
-                            setState(() {
-                              themeMode.value = newMode;
-                            });
-                            // Apply the selected theme mode
-                            if (newMode == ThemeMode.light) {
-                              Get.changeThemeMode(ThemeMode.light);
-                            } else if (newMode == ThemeMode.dark) {
-                              Get.changeThemeMode(ThemeMode.dark);
-                            } else {
-                              Get.changeThemeMode(ThemeMode.system);
-                            }
-                          }
-                        },
-                        items: const [
-                          DropdownMenuItem(
-                            value: ThemeMode.light,
-                            child: Text('Light Mode'),
-                          ),
-                          DropdownMenuItem(
-                            value: ThemeMode.dark,
-                            child: Text('Dark Mode'),
-                          ),
-                          DropdownMenuItem(
-                            value: ThemeMode.system,
-                            child: Text('System Default'),
-                          ),
-                        ],
+                      trailing: Text(
+                        // Display the theme mode as text (e.g., Light Mode)
+                        themeMode.value == ThemeMode.light
+                            ? 'Light Mode'
+                            : themeMode.value == ThemeMode.dark
+                                ? 'Dark Mode'
+                                : 'System Default',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black54,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 16),
 
                   // Section with extra info
                   Card(
@@ -118,7 +85,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                               color: Colors.black87,
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 8),
                           Text(
                             'This is a crypto tracker application that allows users to monitor cryptocurrency prices in real-time. It fetches data from the CoinGecko API and provides various options to toggle between different theme modes.',
                             style: TextStyle(
@@ -130,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 16),
 
                   // Another Section (You can customize more as per need)
                   SizedBox(
@@ -155,7 +122,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                 color: Colors.black87,
                               ),
                             ),
-                            SizedBox(height: 10),
+                            SizedBox(height: 8),
                             Text(
                               'Version 1.0.0',
                               style: TextStyle(

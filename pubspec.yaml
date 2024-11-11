@@ -16,6 +16,8 @@ dependencies:
   google_fonts: ^6.2.1
   get: ^4.6.6
   http: ^1.2.2
+  flutter_native_splash: ^2.4.2
+  flutter_launcher_icons: ^0.14.1
 
 dev_dependencies:
   flutter_test:
@@ -29,3 +31,14 @@ flutter:
   assets:
     - assets/images/tokentrac.png
 
+flutter_native_splash:
+  color: "#FFFFFF" # Background color of the splash screen
+  image: assets/images/tokentrac.png # Path to your splash image
+  # Optional configurations:
+  android: true
+  ios: true
+  web: true
+
+  # Optional configurations
+  android_gravity: center # Position of the logo on Android
+  ios_content_mode: center # Position of the logo on iOS

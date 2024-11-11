@@ -53,8 +53,8 @@ class CustomAppBar extends StatelessWidget {
                     child: Container(
                       width: 280,
                       height: MediaQuery.of(context).size.height,
-                      decoration: BoxDecoration(
-                        gradient: const LinearGradient(
+                      decoration: const BoxDecoration(
+                        gradient: LinearGradient(
                           colors: [
                             Colors.white, // Pastel Peach
                             Color(0x301FABF1), // Bluish pastel
@@ -62,7 +62,7 @@ class CustomAppBar extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: const BorderRadius.only(
+                        borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(30),
                           bottomLeft: Radius.circular(30),
                         ),

@@ -1,5 +1,5 @@
+import 'package:crypto_tracker/shared/components/header.dart';
 import 'package:flutter/material.dart';
-import 'package:crypto_tracker/shared/components/header.dart'; // Custom AppBar widget
 
 class CreditsScreen extends StatelessWidget {
   const CreditsScreen({super.key});
@@ -9,47 +9,45 @@ class CreditsScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const CustomAppBar(), // Custom header bar at the top
-          // Use Expanded or SingleChildScrollView to make sure content is scrollable
+          const CustomAppBar(),
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ListView(
-                children: [
-                  // Section for Credits Title
-                  const Text(
-                    'Credits & Project Information',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+            child: Scrollbar(
+              thumbVisibility: true, // Makes the thumb visible always
+              trackVisibility: true, // Makes the track visible always
+              thickness: 4.0,
+
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Credits & Project Information',
+                      style: Theme.of(context).textTheme.headlineSmall,
                     ),
-                  ),
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 16),
+                    const Divider(),
+                    const SizedBox(height: 16),
 
-                  // Developer Section
-                  _buildSectionTitle('Main Developer:'),
-                  const SizedBox(height: 8),
-                  _buildDeveloperInfo(),
-                  const SizedBox(height: 20),
+                    // Developer Section
+                    _buildSectionTitle(context, '1. Main Developer'),
+                    const SizedBox(height: 8),
+                    _buildDeveloperInfo(context),
+                    const SizedBox(height: 16),
 
-                  // Project Details Section
-                  _buildSectionTitle('Project Information:'),
-                  const SizedBox(height: 8),
-                  _buildProjectDetails(),
-                  const SizedBox(height: 20),
+                    // Project Details Section
+                    _buildSectionTitle(context, '2. Project Information'),
+                    const SizedBox(height: 8),
+                    _buildProjectDetails(context),
+                    const SizedBox(height: 16),
 
-                  // Libraries Section
-                  _buildSectionTitle('Libraries and Tools Used:'),
-                  const SizedBox(height: 8),
-                  _buildLibrariesList(),
-                  const SizedBox(height: 20),
-
-                  // Asset Credits Section
-                  _buildSectionTitle('Asset Credits:'),
-                  const SizedBox(height: 8),
-                  _buildAssetCredits(),
-                ],
+                    // Libraries Section
+                    _buildSectionTitle(context, '3. Libraries and Tools Used'),
+                    const SizedBox(height: 8),
+                    _buildLibrariesList(context),
+                    const SizedBox(height: 16),
+                  ],
+                ),
               ),
             ),
           ),
@@ -58,95 +56,138 @@ class CreditsScreen extends StatelessWidget {
     );
   }
 
-  // Builds Section Title with Bluish Color
-  Widget _buildSectionTitle(String title) {
+  // Builds Section Title with a clean formal style
+  Widget _buildSectionTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: const TextStyle(
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF1FABF1), // Bluish color for section headers
+      style: Theme.of(context).textTheme.labelLarge,
+    );
+  }
+
+  // Developer Info Section with formal card styling
+  Widget _buildDeveloperInfo(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'MAITHA AL AMRI \nFlutter Developer, Lead Developer, responsible for building the app, integrating APIs, and designing UI.\n',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: const Color.fromARGB(255, 145, 186, 194),
+                fontWeight: FontWeight.w400),
+          ),
+          Text(
+            'Portfolio: ',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: const Color.fromARGB(255, 145, 186, 194),
+                fontWeight: FontWeight.w400),
+          ),
+          InkWell(
+            onTap: () {
+              _launchURL('https://www.maitha.dev/light');
+            },
+            child: Text(
+              'www.maitha.dev/light',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w400, color: Colors.black45),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'GitHub: ',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: const Color.fromARGB(255, 145, 186, 194),
+                fontWeight: FontWeight.w400),
+          ),
+          InkWell(
+            onTap: () {
+              _launchURL('https://github.com/MAITH98');
+            },
+            child: Text(
+              'github.com/MAITH98',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w400, color: Colors.black45),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'LinkedIn: ',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: const Color.fromARGB(255, 145, 186, 194),
+                fontWeight: FontWeight.w400),
+          ),
+          InkWell(
+            onTap: () {
+              _launchURL('https://www.linkedin.com/in/maithaalamri');
+            },
+            child: Text(
+              'www.linkedin.com/in/maithaalamri',
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                  fontWeight: FontWeight.w400, color: Colors.black45),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  // Developer Info Section with Card Styling
-  Widget _buildDeveloperInfo() {
-    return Card(
-      color: Colors.white,
-      elevation: 8,
-      shadowColor: Colors.black.withOpacity(0.1),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.all(16),
-        child: Text(
-          'MAITHA AL AMRI - Flutter Developer\n'
-          'Lead Developer, responsible for building the app, integrating APIs, and designing UI.',
-          style: TextStyle(fontSize: 16, color: Colors.black87),
-        ),
+  // Project Information Section with consistent style
+  Widget _buildProjectDetails(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Text(
+        'This project, Crypto Tracker, is a Flutter-based mobile application designed to track cryptocurrency prices and market data. '
+        'The app fetches real-time data from the CoinGecko API, allowing users to monitor cryptocurrency trends such as price, market cap, and volume.\n\n'
+        'Features include:\n'
+        '- Real-time cryptocurrency price tracking.\n'
+        '- Historical data such as all-time highs and lows.\n'
+        '- Market cap and volume statistics.\n\n'
+        'The app is built using Flutter, leveraging state management with GetX for efficient and responsive UI rendering.',
+        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              fontWeight: FontWeight.w400,
+              color: const Color.fromARGB(255, 145, 186, 194),
+            ),
       ),
     );
   }
 
-  // Project Information Section
-  Widget _buildProjectDetails() {
-    return const Text(
-      'This project, Crypto Tracker, is a Flutter-based mobile application designed to track cryptocurrency prices and market data. '
-      'The app fetches real-time data from the CoinGecko API, allowing users to monitor cryptocurrency trends such as price, market cap, and volume.\n\n'
-      'Features include:\n'
-      '- Real-time cryptocurrency price tracking.\n'
-      '- Historical data such as all-time highs and lows.\n'
-      '- Market cap and volume statistics.\n\n'
-      'The app is built using Flutter, leveraging state management with GetX for efficient and responsive UI rendering.',
-      style: TextStyle(fontSize: 16, color: Colors.black87),
-    );
-  }
-
-  // Libraries Section
-  Widget _buildLibrariesList() {
+  // Libraries Section with consistent formatting
+  Widget _buildLibrariesList(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildLibraryItem('Flutter', 'https://flutter.dev',
+        _buildLibraryItem(context, 'Flutter', 'https://flutter.dev',
             'Framework for building natively compiled applications.'),
-        _buildLibraryItem('GetX', 'https://pub.dev/packages/get',
+        _buildLibraryItem(context, 'GetX', 'https://pub.dev/packages/get',
             'State management and route management library for Flutter.'),
-        _buildLibraryItem('http', 'https://pub.dev/packages/http',
+        _buildLibraryItem(context, 'http', 'https://pub.dev/packages/http',
             'Package to make HTTP requests.'),
         _buildLibraryItem(
+            context,
             'Google Fonts',
             'https://pub.dev/packages/google_fonts',
             'Custom fonts for beautiful typography.'),
         _buildLibraryItem(
+            context,
             'Cupertino Icons',
             'https://pub.dev/packages/cupertino_icons',
             'Provides iOS-style icons.'),
-        // Add any additional libraries here
+        // Add more libraries as necessary
       ],
     );
   }
 
-  // Asset Credits Section
-  Widget _buildAssetCredits() {
-    return const Text(
-      'Logo Icon: TokenTrac logo by [Author Name], used under [license].\n'
-      'Images: Free image resources from [source].',
-      style: TextStyle(fontSize: 16, color: Colors.black54),
-    );
-  }
-
-  // Builds a Library Item with link and description
-  Widget _buildLibraryItem(
-      String libraryName, String link, String description) {
+  // Builds a Library Item with link and description in a clean format
+  Widget _buildLibraryItem(BuildContext context, String libraryName,
+      String link, String description) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12.0),
       child: Row(
         children: [
           const Icon(
             Icons.arrow_forward,
-            size: 20,
+            size: 16,
             color: Color(0xFF1FABF1), // Bluish color for the arrow icon
           ),
           const SizedBox(width: 8),
@@ -156,22 +197,23 @@ class CreditsScreen extends StatelessWidget {
             },
             child: Text(
               libraryName,
-              style: const TextStyle(
-                color: Color(0xFF1FABF1), // Bluish color for the link
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                decoration: TextDecoration.underline,
-              ),
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromARGB(255, 145, 186, 194),
+                  ),
             ),
           ),
           const SizedBox(width: 8),
-          // Make description horizontally scrollable
+          // Make description horizontally scrollable if needed
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Text(
                 '- $description',
-                style: const TextStyle(fontSize: 14, color: Colors.black54),
+                style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: Colors.black45,
+                    ),
               ),
             ),
           ),
@@ -180,7 +222,7 @@ class CreditsScreen extends StatelessWidget {
     );
   }
 
-  // Function to launch a URL
+  // Function to launch a URL (make sure to use url_launcher or similar in production)
   void _launchURL(String url) {
     // You can use the `url_launcher` package to open URLs in a web browser.
     // Example:
